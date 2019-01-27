@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        point_chances.text = "\(displayed_chances)/\(numberOfChances)"
+        point_chances.text = "\(displayed_chances)/\(numberOfChances) Chances"
         
         // restart button
         restartBtn.isHidden = true
@@ -47,33 +47,41 @@ class ViewController: UIViewController {
     func updateUI(){
      
         let divided_viewWidth = self.view.frame.width / CGFloat(numberOfChances)
-        progess_bar.frame.size.width = (divided_viewWidth * CGFloat(chances))
+        progess_bar.frame.size.width = (divided_viewWidth * CGFloat(displayed_chances))
         
     }
     
     @IBAction func pressBtn(_ sender: UIButton) {
         
-        if sender.tag == 1{
-            
         if(chances<numberOfChances){
         chances=chances+1
         displayed_chances = displayed_chances - 1
         }
+            
         else{
             restartBtn.isHidden = false
         }
-        point_chances.text = "\(displayed_chances)/\(numberOfChances)"
+        
+        point_chances.text = "\(displayed_chances)/\(numberOfChances) Chances"
         
         updateUI()
        
-        }else if sender.tag == 2 {
-            // reset the number of the chances 
-            chances = 0
-            
-            point_chances.text = "\(chances)/\(numberOfChances)"
-            restartBtn.isHidden = true
         }
+    
+    
+    @IBAction func resetBtnPressed(_ sender: Any) {
+        
+        // reset the number of the chances
+        chances = 0
+        displayed_chances = 6
+        
+        point_chances.text = "\(displayed_chances)/\(numberOfChances) Chances"
+        // make the reset button hidden again
+        self.restartBtn.isHidden = true
     }
+    
+    
+
     
 }
 
